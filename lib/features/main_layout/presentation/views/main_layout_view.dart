@@ -1,5 +1,6 @@
 import 'package:cipher_text/core/utils/consts/app_colors.dart';
 import 'package:cipher_text/core/utils/consts/app_styles.dart';
+import 'package:cipher_text/features/vigenere_cipher/presentation/views/vigenere_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../caesar_cipher/presentation/views/caesar_view.dart';
@@ -112,7 +113,7 @@ class _MainLayoutViewState extends State<MainLayoutView> {
       case 2:
         return const Center(child: Text('Playfair View Coming Soon...'));
       case 3:
-        return const Center(child: Text('Vigenère View Coming Soon...'));
+        return const VigenereView();
       case 4:
         return const Center(child: Text('Hill View Coming Soon...'));
       default:
@@ -240,18 +241,19 @@ class _MainLayoutViewState extends State<MainLayoutView> {
           1,
           isMobile,
         ),
-        _buildSidebarItem(
-          'Playfair',
-          '5x5 matrix',
-          Icons.grid_view_rounded,
-          2,
-          isMobile,
-        ),
+
         _buildSidebarItem(
           'Vigenère',
           'Polyalphabetic',
           Icons.vpn_key_outlined,
           3,
+          isMobile,
+        ),
+        _buildSidebarItem(
+          'Playfair',
+          '5x5 matrix',
+          Icons.grid_view_rounded,
+          2,
           isMobile,
         ),
         _buildSidebarItem(
