@@ -3,16 +3,31 @@ import 'caesar_state.dart';
 import '../../data/models/caesar_step_model.dart';
 
 class CaesarCubit extends Cubit<CaesarState> {
+  static const String _standardAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
   CaesarCubit()
       : super(CaesarActive(
           text: 'Hello World',
           shift: 3,
           isEncrypt: true,
+          cipherAlphabet: _generateCipherAlphabet(3, true),
           steps: const [],
           currentStep: -1,
           isAnimating: false,
         )) {
     _generateSteps('Hello World', 3, true);
+  }
+
+  // Generates the shifted 26-letter string for the Substitution Table
+  static String _generateCipherAlphabet(int shift, bool isEncrypt) {
+    int actualShift = isEncrypt ? shift : -shift;
+    String result = "";
+    for (int i = 0; i < 26; i++) {
+      int shifted = (i + actualShift) % 26;
+      if (shifted < 0) shifted += 26;
+      result += String.fromCharCode(shifted + 65);
+    }
+    return result;
   }
 
   void updateText(String text) {
@@ -39,6 +54,7 @@ class CaesarCubit extends Cubit<CaesarState> {
   void _generateSteps(String text, int shift, bool isEncrypt) {
     List<CaesarStepModel> steps = [];
     int actualShift = isEncrypt ? shift : -shift;
+    String currentCipherAlphabet = _generateCipherAlphabet(shift, isEncrypt);
 
     for (int i = 0; i < text.length; i++) {
       String char = text[i];
@@ -64,6 +80,7 @@ class CaesarCubit extends Cubit<CaesarState> {
         text: text,
         shift: shift,
         isEncrypt: isEncrypt,
+        cipherAlphabet: currentCipherAlphabet,
         steps: steps,
         currentStep: -1,
         isAnimating: false));

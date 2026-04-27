@@ -48,11 +48,9 @@ class MonoalphabeticAnimationBoard extends StatelessWidget {
                 children: [
                   Text('SUBSTITUTION TABLE', style: AppStyles.sectionHeader),
                   const SizedBox(height: 16),
-                  // 🔥 REPLACED ScrollView/Row with a Wrap widget
                   Wrap(
-                    spacing: 8.0, // Horizontal space between items
-                    runSpacing:
-                        16.0, // Vertical space if it wraps to the next line
+                    spacing: 8.0, 
+                    runSpacing: 16.0, 
                     children: List.generate(26, (index) {
                       String standardChar = String.fromCharCode(65 + index);
                       String cipherChar = state.cipherAlphabet[index];
@@ -64,7 +62,6 @@ class MonoalphabeticAnimationBoard extends StatelessWidget {
                             : cipherChar == activeLetterToHighlight;
                       }
 
-                      // Removed the Padding widget, Wrap handles spacing now
                       return Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [

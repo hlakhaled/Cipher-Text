@@ -12,6 +12,7 @@ class CaesarActive extends CaesarState {
   final String text;
   final int shift;
   final bool isEncrypt;
+  final String cipherAlphabet;
   final List<CaesarStepModel> steps;
   final int currentStep;
   final bool isAnimating;
@@ -20,6 +21,7 @@ class CaesarActive extends CaesarState {
     required this.text,
     required this.shift,
     required this.isEncrypt,
+    required this.cipherAlphabet,
     required this.steps,
     required this.currentStep,
     required this.isAnimating,
@@ -30,6 +32,7 @@ class CaesarActive extends CaesarState {
         text,
         shift,
         isEncrypt,
+        cipherAlphabet,
         steps,
         currentStep,
         isAnimating,
@@ -39,6 +42,7 @@ class CaesarActive extends CaesarState {
     String? text,
     int? shift,
     bool? isEncrypt,
+    String? cipherAlphabet,
     List<CaesarStepModel>? steps,
     int? currentStep,
     bool? isAnimating,
@@ -47,6 +51,7 @@ class CaesarActive extends CaesarState {
       text: text ?? this.text,
       shift: shift ?? this.shift,
       isEncrypt: isEncrypt ?? this.isEncrypt,
+      cipherAlphabet: cipherAlphabet ?? this.cipherAlphabet,
       steps: steps ?? this.steps,
       currentStep: currentStep ?? this.currentStep,
       isAnimating: isAnimating ?? this.isAnimating,

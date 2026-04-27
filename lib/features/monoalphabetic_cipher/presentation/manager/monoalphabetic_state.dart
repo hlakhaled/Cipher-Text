@@ -10,7 +10,7 @@ class MonoalphabeticInitial extends MonoalphabeticState {}
 
 class MonoalphabeticActive extends MonoalphabeticState {
   final String text;
-  final String keyword;
+  final String cipherKey; 
   final bool isEncrypt;
   final String cipherAlphabet;
   final List<MonoalphabeticStepModel> steps;
@@ -19,7 +19,7 @@ class MonoalphabeticActive extends MonoalphabeticState {
 
   MonoalphabeticActive({
     required this.text,
-    required this.keyword,
+    required this.cipherKey,
     required this.isEncrypt,
     required this.cipherAlphabet,
     required this.steps,
@@ -30,7 +30,7 @@ class MonoalphabeticActive extends MonoalphabeticState {
   @override
   List<Object?> get props => [
         text,
-        keyword,
+        cipherKey,
         isEncrypt,
         cipherAlphabet,
         steps,
@@ -40,7 +40,7 @@ class MonoalphabeticActive extends MonoalphabeticState {
 
   MonoalphabeticActive copyWith({
     String? text,
-    String? keyword,
+    String? cipherKey,
     bool? isEncrypt,
     String? cipherAlphabet,
     List<MonoalphabeticStepModel>? steps,
@@ -49,7 +49,7 @@ class MonoalphabeticActive extends MonoalphabeticState {
   }) {
     return MonoalphabeticActive(
       text: text ?? this.text,
-      keyword: keyword ?? this.keyword,
+      cipherKey: cipherKey ?? this.cipherKey,
       isEncrypt: isEncrypt ?? this.isEncrypt,
       cipherAlphabet: cipherAlphabet ?? this.cipherAlphabet,
       steps: steps ?? this.steps,

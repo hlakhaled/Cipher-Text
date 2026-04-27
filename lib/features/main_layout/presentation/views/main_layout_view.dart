@@ -4,7 +4,7 @@ import 'package:cipher_text/features/vigenere_cipher/presentation/views/vigenere
 import 'package:flutter/material.dart';
 
 import '../../../caesar_cipher/presentation/views/caesar_view.dart';
-// Make sure this import path matches your structure
+
 import '../../../monoalphabetic_cipher/presentation/views/monoalphabetic_view.dart';
 
 class MainLayoutView extends StatefulWidget {
@@ -16,7 +16,7 @@ class MainLayoutView extends StatefulWidget {
 
 class _MainLayoutViewState extends State<MainLayoutView> {
   bool _isSidebarVisible = true;
-  int _selectedIndex = 0; // Tracks which cipher is currently selected
+  int _selectedIndex = 0; 
 
   @override
   Widget build(BuildContext context) {
@@ -242,27 +242,27 @@ class _MainLayoutViewState extends State<MainLayoutView> {
           isMobile,
         ),
 
-        _buildSidebarItem(
-          'Vigenère',
-          'Polyalphabetic',
-          Icons.vpn_key_outlined,
-          3,
-          isMobile,
-        ),
-        _buildSidebarItem(
-          'Playfair',
-          '5x5 matrix',
-          Icons.grid_view_rounded,
-          2,
-          isMobile,
-        ),
-        _buildSidebarItem(
-          'Hill',
-          'Matrix cipher',
-          Icons.calculate_outlined,
-          4,
-          isMobile,
-        ),
+        // _buildSidebarItem(
+        //   'Vigenère',
+        //   'Polyalphabetic',
+        //   Icons.vpn_key_outlined,
+        //   3,
+        //   isMobile,
+        // ),
+        // _buildSidebarItem(
+        //   'Playfair',
+        //   '5x5 matrix',
+        //   Icons.grid_view_rounded,
+        //   2,
+        //   isMobile,
+        // ),
+        // _buildSidebarItem(
+        //   'Hill',
+        //   'Matrix cipher',
+        //   Icons.calculate_outlined,
+        //   4,
+        //   isMobile,
+        // ),
       ],
     );
   }

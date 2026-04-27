@@ -57,7 +57,7 @@ class MonoalphabeticView extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Each letter maps to a fixed substitute. The keyword seeds a 26-letter substitution alphabet.',
+                        'Provide a full 26-letter scrambled alphabet to map every character securely.',
                         style: AppStyles.subtitle,
                       ),
                     ],

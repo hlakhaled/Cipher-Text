@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // Added for input formatters
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../manager/monoalphabetic_cubit.dart';
 import '../../manager/monoalphabetic_state.dart';
@@ -39,7 +40,7 @@ class MonoalphabeticInputSection extends StatelessWidget {
                       children: [
                         _buildPlainTextInput(context, state),
                         const SizedBox(height: 20),
-                        _buildKeywordInput(context, state),
+                        _buildCipherKeyInput(context, state),
                       ],
                     )
                   : Row(
@@ -52,7 +53,7 @@ class MonoalphabeticInputSection extends StatelessWidget {
                         const SizedBox(width: 32),
                         Expanded(
                           flex: 2,
-                          child: _buildKeywordInput(context, state),
+                          child: _buildCipherKeyInput(context, state),
                         ),
                       ],
                     ),
@@ -125,7 +126,7 @@ class MonoalphabeticInputSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Plain Text', style: AppStyles.body),
+        Text('Text Input', style: AppStyles.body),
         const SizedBox(height: 12),
         TextFormField(
           initialValue: state.text,
@@ -153,20 +154,26 @@ class MonoalphabeticInputSection extends StatelessWidget {
     );
   }
 
-  Widget _buildKeywordInput(BuildContext context, MonoalphabeticActive state) {
+  Widget _buildCipherKeyInput(BuildContext context, MonoalphabeticActive state) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Keyword', style: AppStyles.body),
+        Text('26-Letter Key', style: AppStyles.body),
         const SizedBox(height: 12),
         TextFormField(
-          initialValue: state.keyword,
+          initialValue: state.cipherKey,
           style: AppStyles.body,
+          maxLength: 26, // Enforces the 26 character rule visually
+          textCapitalization: TextCapitalization.characters,
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
+          ],
           onChanged: (val) =>
-              context.read<MonoalphabeticCubit>().updateKeyword(val),
+              context.read<MonoalphabeticCubit>().updateCipherKey(val),
           decoration: InputDecoration(
             filled: true,
             fillColor: AppColors.background,
+            hintText: "Enter 26 unique letters",
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
               borderSide: const BorderSide(color: AppColors.border),

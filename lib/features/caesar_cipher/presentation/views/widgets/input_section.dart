@@ -125,7 +125,7 @@ class InputSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Plain Text', style: AppStyles.body),
+        Text('Text Input', style: AppStyles.body),
         const SizedBox(height: 12),
         TextFormField(
           initialValue: state.text,

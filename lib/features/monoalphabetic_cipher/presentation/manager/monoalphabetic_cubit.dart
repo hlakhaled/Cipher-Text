@@ -5,29 +5,34 @@ import '../../data/models/monoalphabetic_step_model.dart';
 class MonoalphabeticCubit extends Cubit<MonoalphabeticState> {
   static const String _standardAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
+  static const String _defaultKey = "QWERTYUIOPASDFGHJKLZXCVBNM"; 
+
   MonoalphabeticCubit()
       : super(MonoalphabeticActive(
           text: 'Hello World',
-          keyword: 'KEYWORD',
+          cipherKey: _defaultKey,
           isEncrypt: true,
-          cipherAlphabet: _generateCipherAlphabet('KEYWORD'),
+          cipherAlphabet: _formatCipherKey(_defaultKey),
           steps: const [],
           currentStep: -1,
           isAnimating: false,
         )) {
-    _processText('Hello World', 'KEYWORD', true);
+    _processText('Hello World', _defaultKey, true);
   }
 
-  static String _generateCipherAlphabet(String keyword) {
-    String cleanKey = keyword.toUpperCase().replaceAll(RegExp(r'[^A-Z]'), '');
+
+  static String _formatCipherKey(String inputKey) {
+    String cleanKey = inputKey.toUpperCase().replaceAll(RegExp(r'[^A-Z]'), '');
     String result = "";
     
+  
     for (int i = 0; i < cleanKey.length; i++) {
       if (!result.contains(cleanKey[i])) {
         result += cleanKey[i];
       }
     }
     
+
     for (int i = 0; i < _standardAlphabet.length; i++) {
       if (!result.contains(_standardAlphabet[i])) {
         result += _standardAlphabet[i];
@@ -39,26 +44,27 @@ class MonoalphabeticCubit extends Cubit<MonoalphabeticState> {
   void updateText(String text) {
     if (state is MonoalphabeticActive) {
       final currentState = state as MonoalphabeticActive;
-      _processText(text, currentState.keyword, currentState.isEncrypt);
+      _processText(text, currentState.cipherKey, currentState.isEncrypt);
     }
   }
 
-  void updateKeyword(String keyword) {
+  // Renamed to updateCipherKey
+  void updateCipherKey(String newKey) {
     if (state is MonoalphabeticActive) {
       final currentState = state as MonoalphabeticActive;
-      _processText(currentState.text, keyword, currentState.isEncrypt);
+      _processText(currentState.text, newKey, currentState.isEncrypt);
     }
   }
 
   void setMode(bool isEncrypt) {
     if (state is MonoalphabeticActive) {
       final currentState = state as MonoalphabeticActive;
-      _processText(currentState.text, currentState.keyword, isEncrypt);
+      _processText(currentState.text, currentState.cipherKey, isEncrypt);
     }
   }
 
-  void _processText(String text, String keyword, bool isEncrypt) {
-    String currentCipherAlphabet = _generateCipherAlphabet(keyword);
+  void _processText(String text, String cipherKey, bool isEncrypt) {
+    String currentCipherAlphabet = _formatCipherKey(cipherKey);
     List<MonoalphabeticStepModel> steps = [];
 
     for (int i = 0; i < text.length; i++) {
@@ -92,7 +98,7 @@ class MonoalphabeticCubit extends Cubit<MonoalphabeticState> {
 
     emit(MonoalphabeticActive(
         text: text,
-        keyword: keyword,
+        cipherKey: cipherKey,
         isEncrypt: isEncrypt,
         cipherAlphabet: currentCipherAlphabet,
         steps: steps,
