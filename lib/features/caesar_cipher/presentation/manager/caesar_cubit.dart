@@ -18,7 +18,7 @@ class CaesarCubit extends Cubit<CaesarState> {
     _generateSteps('Hello World', 3, true);
   }
 
-  // Generates the shifted 26-letter string for the Substitution Table
+
   static String _generateCipherAlphabet(int shift, bool isEncrypt) {
     int actualShift = isEncrypt ? shift : -shift;
     String result = "";

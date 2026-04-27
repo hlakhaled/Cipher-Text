@@ -48,7 +48,7 @@ class MonoalphabeticCubit extends Cubit<MonoalphabeticState> {
     }
   }
 
-  // Renamed to updateCipherKey
+
   void updateCipherKey(String newKey) {
     if (state is MonoalphabeticActive) {
       final currentState = state as MonoalphabeticActive;
